@@ -77,12 +77,12 @@ var index = 0
          
           var hours = difference.hour
           var minutes = difference.minute
-          var seconds = difference.second
+        let seconds = difference.second
           var indicesToReloadAt = [IndexPath]()
           for elem in TableTableViewController.timers {
               if elem.isEnabled == true {
                   
-                  var total = elem.seconds + ((elem.minutes * 60) + (elem.hours * 60 * 60))
+                  let total = elem.seconds + ((elem.minutes * 60) + (elem.hours * 60 * 60))
                   print(total)
                   print(Int(difference))
                   if total > Int(difference) {
@@ -91,7 +91,7 @@ var index = 0
                           elem.minutes -= minutes
                         
                       } else {
-                          var advantage = minutes - elem.minutes
+                          let advantage = minutes - elem.minutes
                         elem.hours -= 1
                           elem.minutes = 60
                           elem.minutes -= advantage
@@ -100,7 +100,7 @@ var index = 0
                           elem.seconds -= seconds
                         
                       } else {
-                          var advantage = seconds - elem.seconds
+                          let advantage = seconds - elem.seconds
                           if minutes < 1 {
                               hours -= 1
                               minutes = 60
@@ -121,7 +121,7 @@ var index = 0
                       TableTableViewController.cells[index].currentSeconds =  elem.seconds
                       print(TableTableViewController.cells[index])
                     
-                      var random = Double.random(in: 0.2...0.7)
+                      let random = Double.random(in: 0.2...0.7)
                      
                           DispatchQueue.main.asyncAfter(deadline: .now() + random) {
                               elem.start()
@@ -133,7 +133,6 @@ var index = 0
                   } else {
                       print("thats the case")
                       print(TableTableViewController.originalTimers)
-                     index - 1
                       elem.hours = TableTableViewController.originalTimers[index].hours
                       elem.minutes = TableTableViewController.originalTimers[index].minutes
                       elem.seconds = TableTableViewController.originalTimers[index].seconds
