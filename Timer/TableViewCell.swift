@@ -18,8 +18,7 @@ struct swipeLeftRight {
 
 
 class TableViewCell: UITableViewCell {
-    
-    
+       
     var subscriptions = Set<AnyCancellable>()
     // subjects used to send the data from cell swipe to the TableTableViewController:
     static let TableViewCellSubjcet = PassthroughSubject<swipeLeftRight, Never>()
@@ -149,7 +148,7 @@ class TableViewCell: UITableViewCell {
 
     @objc func tapped() {
         print("Gesture")
-        var swipeLeftRight = swipeLeftRight(description: self.description, swipeLeft: false )
+        let swipeLeftRight = swipeLeftRight(description: self.description, swipeLeft: false )
         TableViewCell.TableViewCellSubjcet.send(swipeLeftRight)
         
         
@@ -158,7 +157,7 @@ class TableViewCell: UITableViewCell {
 
     @objc func tapped2() {
         print("gesture")
-        var swipeLeftRight = swipeLeftRight(description: self.description, swipeLeft: true )
+        let swipeLeftRight = swipeLeftRight(description: self.description, swipeLeft: true )
         TableViewCell.TableViewCellSubjcet.send(swipeLeftRight)
         
         
