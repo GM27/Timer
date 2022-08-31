@@ -448,7 +448,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
 
         
         TableTableViewController.timers[positionOfACellWithTheView.row].stop()
-        var notification =  TableTableViewController.timers[positionOfACellWithTheView.row].notification
+        let  notification =  TableTableViewController.timers[positionOfACellWithTheView.row].notification
       
         // removes notification from the element in the array, removes the edit and delete buttons with their view and deletes the row from the table view
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notification.id])
