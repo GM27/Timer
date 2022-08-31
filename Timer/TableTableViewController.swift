@@ -837,10 +837,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         return false
     }
     
-    
 }
-
-
 
 
 extension TimeInterval {
