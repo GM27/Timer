@@ -120,6 +120,10 @@ class Timer2: Codable {
     
 }
 
+
+
+
+
 // a struct to fixate the initial hours, minutes, seconds, of timers so you could easily reset them later:
 struct TimeToReset: Codable {
     var hours: Int
@@ -137,10 +141,5 @@ struct DataToRefil {
 }
 
 
-struct PrintingModel {
-   static var pastDate = Date()
-  static  var nowDate = Date()
-    
-}
 
 

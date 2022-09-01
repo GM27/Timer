@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3F5C737E28A3540500F3C8EB /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C737D28A3540500F3C8EB /* CellModel.swift */; };
-		3F5D56DB28A9EF680009AA7B /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D56DA28A9EF680009AA7B /* Persistance.swift */; };
+		3F5D56DB28A9EF680009AA7B /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D56DA28A9EF680009AA7B /* PersistanceManager.swift */; };
 		3F685624282B431C00A1A352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F685623282B431C00A1A352 /* AppDelegate.swift */; };
 		3F685626282B431C00A1A352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F685625282B431C00A1A352 /* SceneDelegate.swift */; };
-		3F685628282B431C00A1A352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F685627282B431C00A1A352 /* ViewController.swift */; };
+		3F685628282B431C00A1A352 /* CreatingTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F685627282B431C00A1A352 /* CreatingTimerViewController.swift */; };
 		3F68562B282B431C00A1A352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F685629282B431C00A1A352 /* Main.storyboard */; };
 		3F68562D282B431D00A1A352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68562C282B431D00A1A352 /* Assets.xcassets */; };
 		3F685630282B431D00A1A352 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F68562E282B431D00A1A352 /* LaunchScreen.storyboard */; };
@@ -24,6 +24,13 @@
 		3FC3245028B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3244F28B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav */; };
 		3FC3245228B7ED5D0036FC18 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC3245128B7ED5D0036FC18 /* UIColorExtension.swift */; };
 		3FC3245428B7EDEF0036FC18 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC3245328B7EDEF0036FC18 /* UIViewExtension.swift */; };
+		3FC3245828C040630036FC18 /* SoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC3245728C040630036FC18 /* SoundsViewController.swift */; };
+		3FC3245A28C040880036FC18 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC3245928C040880036FC18 /* TimeIntervalExtension.swift */; };
+		3FC3245D28C042CA0036FC18 /* COMCell_Message 1 (ID 1111)_BSB.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3245C28C042CA0036FC18 /* COMCell_Message 1 (ID 1111)_BSB.wav */; };
+		3FC3245F28C043450036FC18 /* MUSCChim_Glockenspiel (ID 0920)_BSB.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3245E28C043450036FC18 /* MUSCChim_Glockenspiel (ID 0920)_BSB.wav */; };
+		3FC3246128C043CC0036FC18 /* BEEP_Censorship 2 (ID 1311)_BSB.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3246028C043CC0036FC18 /* BEEP_Censorship 2 (ID 1311)_BSB.wav */; };
+		3FC3246428C044EC0036FC18 /* quandale-dingle-crime-Sound-Effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3246328C044EC0036FC18 /* quandale-dingle-crime-Sound-Effect.wav */; };
+		3FC3246628C046870036FC18 /* THE-KILLER-IS-ESCAPING.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FC3246528C046870036FC18 /* THE-KILLER-IS-ESCAPING.wav */; };
 		3FF11D2D28B16597003D5FF2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF11D2C28B16597003D5FF2 /* TextField.swift */; };
 		3FF11D3128B1D95B003D5FF2 /* ViewFrameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF11D3028B1D95B003D5FF2 /* ViewFrameStorage.swift */; };
 		3FF30C3828AC9FBA005007E5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF30C3728AC9FBA005007E5 /* NotificationManager.swift */; };
@@ -48,11 +55,11 @@
 
 /* Begin PBXFileReference section */
 		3F5C737D28A3540500F3C8EB /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
-		3F5D56DA28A9EF680009AA7B /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		3F5D56DA28A9EF680009AA7B /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		3F685620282B431C00A1A352 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F685623282B431C00A1A352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F685625282B431C00A1A352 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3F685627282B431C00A1A352 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F685627282B431C00A1A352 /* CreatingTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTimerViewController.swift; sourceTree = "<group>"; };
 		3F68562A282B431C00A1A352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F68562C282B431D00A1A352 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F68562F282B431D00A1A352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +75,13 @@
 		3FC3244F28B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mixkit-urgent-simple-tone-loop-2976.wav"; sourceTree = "<group>"; };
 		3FC3245128B7ED5D0036FC18 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3FC3245328B7EDEF0036FC18 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		3FC3245728C040630036FC18 /* SoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsViewController.swift; sourceTree = "<group>"; };
+		3FC3245928C040880036FC18 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		3FC3245C28C042CA0036FC18 /* COMCell_Message 1 (ID 1111)_BSB.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "COMCell_Message 1 (ID 1111)_BSB.wav"; sourceTree = "<group>"; };
+		3FC3245E28C043450036FC18 /* MUSCChim_Glockenspiel (ID 0920)_BSB.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MUSCChim_Glockenspiel (ID 0920)_BSB.wav"; sourceTree = "<group>"; };
+		3FC3246028C043CC0036FC18 /* BEEP_Censorship 2 (ID 1311)_BSB.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "BEEP_Censorship 2 (ID 1311)_BSB.wav"; sourceTree = "<group>"; };
+		3FC3246328C044EC0036FC18 /* quandale-dingle-crime-Sound-Effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "quandale-dingle-crime-Sound-Effect.wav"; sourceTree = "<group>"; };
+		3FC3246528C046870036FC18 /* THE-KILLER-IS-ESCAPING.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "THE-KILLER-IS-ESCAPING.wav"; sourceTree = "<group>"; };
 		3FF11D2C28B16597003D5FF2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		3FF11D3028B1D95B003D5FF2 /* ViewFrameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFrameStorage.swift; sourceTree = "<group>"; };
 		3FF30C3728AC9FBA005007E5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -123,19 +137,18 @@
 			children = (
 				3F685623282B431C00A1A352 /* AppDelegate.swift */,
 				3F685625282B431C00A1A352 /* SceneDelegate.swift */,
-				3F685627282B431C00A1A352 /* ViewController.swift */,
-				3FF11D2B28B16586003D5FF2 /* extensions */,
-				3F685629282B431C00A1A352 /* Main.storyboard */,
 				3F685653282B437600A1A352 /* TableTableViewController.swift */,
-				3FF30C3728AC9FBA005007E5 /* NotificationManager.swift */,
-				3F5D56DA28A9EF680009AA7B /* Persistance.swift */,
-				3F5C737D28A3540500F3C8EB /* CellModel.swift */,
+				3F685627282B431C00A1A352 /* CreatingTimerViewController.swift */,
+				3FC3245728C040630036FC18 /* SoundsViewController.swift */,
 				3F685655282B438200A1A352 /* TableViewCell.swift */,
-				3FF11D3028B1D95B003D5FF2 /* ViewFrameStorage.swift */,
-				3F685657282B456800A1A352 /* TimerAndModelData.swift */,
-				3F68562C282B431D00A1A352 /* Assets.xcassets */,
+				3FF30C3728AC9FBA005007E5 /* NotificationManager.swift */,
+				3F5D56DA28A9EF680009AA7B /* PersistanceManager.swift */,
+				3FF11D2B28B16586003D5FF2 /* extensions */,
+				3FC3245628C03F980036FC18 /* Model data */,
 				3FC3245528C03CBF0036FC18 /* Sounds */,
+				3F685629282B431C00A1A352 /* Main.storyboard */,
 				3F68562E282B431D00A1A352 /* LaunchScreen.storyboard */,
+				3F68562C282B431D00A1A352 /* Assets.xcassets */,
 				3F685631282B431D00A1A352 /* Info.plist */,
 			);
 			path = Timer;
@@ -161,9 +174,24 @@
 		3FC3245528C03CBF0036FC18 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3FC3246528C046870036FC18 /* THE-KILLER-IS-ESCAPING.wav */,
+				3FC3246328C044EC0036FC18 /* quandale-dingle-crime-Sound-Effect.wav */,
+				3FC3246028C043CC0036FC18 /* BEEP_Censorship 2 (ID 1311)_BSB.wav */,
+				3FC3245E28C043450036FC18 /* MUSCChim_Glockenspiel (ID 0920)_BSB.wav */,
+				3FC3245C28C042CA0036FC18 /* COMCell_Message 1 (ID 1111)_BSB.wav */,
 				3FC3244F28B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		3FC3245628C03F980036FC18 /* Model data */ = {
+			isa = PBXGroup;
+			children = (
+				3FF11D3028B1D95B003D5FF2 /* ViewFrameStorage.swift */,
+				3F685657282B456800A1A352 /* TimerAndModelData.swift */,
+				3F5C737D28A3540500F3C8EB /* CellModel.swift */,
+			);
+			path = "Model data";
 			sourceTree = "<group>";
 		};
 		3FF11D2B28B16586003D5FF2 /* extensions */ = {
@@ -172,6 +200,7 @@
 				3FC3245328B7EDEF0036FC18 /* UIViewExtension.swift */,
 				3FF11D2C28B16597003D5FF2 /* TextField.swift */,
 				3FC3245128B7ED5D0036FC18 /* UIColorExtension.swift */,
+				3FC3245928C040880036FC18 /* TimeIntervalExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -280,9 +309,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC3246128C043CC0036FC18 /* BEEP_Censorship 2 (ID 1311)_BSB.wav in Resources */,
+				3FC3245F28C043450036FC18 /* MUSCChim_Glockenspiel (ID 0920)_BSB.wav in Resources */,
+				3FC3246428C044EC0036FC18 /* quandale-dingle-crime-Sound-Effect.wav in Resources */,
 				3F685630282B431D00A1A352 /* LaunchScreen.storyboard in Resources */,
 				3FC3245028B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav in Resources */,
+				3FC3246628C046870036FC18 /* THE-KILLER-IS-ESCAPING.wav in Resources */,
 				3F68562D282B431D00A1A352 /* Assets.xcassets in Resources */,
+				3FC3245D28C042CA0036FC18 /* COMCell_Message 1 (ID 1111)_BSB.wav in Resources */,
 				3F68562B282B431C00A1A352 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,17 +343,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F685656282B438200A1A352 /* TableViewCell.swift in Sources */,
+				3FC3245A28C040880036FC18 /* TimeIntervalExtension.swift in Sources */,
 				3FF11D2D28B16597003D5FF2 /* TextField.swift in Sources */,
 				3F685654282B437600A1A352 /* TableTableViewController.swift in Sources */,
 				3FF30C3828AC9FBA005007E5 /* NotificationManager.swift in Sources */,
-				3F685628282B431C00A1A352 /* ViewController.swift in Sources */,
+				3F685628282B431C00A1A352 /* CreatingTimerViewController.swift in Sources */,
 				3FF11D3128B1D95B003D5FF2 /* ViewFrameStorage.swift in Sources */,
 				3F685624282B431C00A1A352 /* AppDelegate.swift in Sources */,
 				3F5C737E28A3540500F3C8EB /* CellModel.swift in Sources */,
-				3F5D56DB28A9EF680009AA7B /* Persistance.swift in Sources */,
+				3F5D56DB28A9EF680009AA7B /* PersistanceManager.swift in Sources */,
 				3FC3245428B7EDEF0036FC18 /* UIViewExtension.swift in Sources */,
 				3F685626282B431C00A1A352 /* SceneDelegate.swift in Sources */,
 				3F685658282B456800A1A352 /* TimerAndModelData.swift in Sources */,
+				3FC3245828C040630036FC18 /* SoundsViewController.swift in Sources */,
 				3FC3245228B7ED5D0036FC18 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

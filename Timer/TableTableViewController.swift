@@ -56,7 +56,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
     //this function creates a subscription to the Timer2's publisher (which is subject)
     func createASubscriptionForTimer() {
       
-        let subscription = Timer2.subject.sink { value in
+         Timer2.subject.sink { value in
            
             print("recivedtheValue")
             //only reloads if table view is currently not editing:
@@ -97,7 +97,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 TableTableViewController.cells[number].currentMinutes = cell2.currentMinutes
                 TableTableViewController.cells[number].currentHours = cell2.currentHours
              print("updated cell:")
-                (TableTableViewController.cells[number].currentHours, ":", TableTableViewController.cells[number].currentMinutes, ":", TableTableViewController.cells[number].currentSeconds)
+                //(TableTableViewController.cells[number].currentHours, ":", TableTableViewController.cells[number].currentMinutes, ":", TableTableViewController.cells[number].currentSeconds)
            // reloading the row that was updated
               //  if self.aboutToReload == true {
               //      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -712,7 +712,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
      
         if tableView.indexPathForSelectedRow == nil {
             print("no indexPath bruh...")
-        if let modelToFill = segue.source as? ViewController {
+        if let modelToFill = segue.source as? CreatingTimerViewController {
            
             // creating a timer to append to array, if timer's minutes, seconds and hours are 0 then the if statement will do nothing and nothing will be added to the arrays:
             if modelToFill.seconds == 0 && modelToFill.minutes == 0 && modelToFill.hours == 0 {
@@ -744,7 +744,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         }
            
         } else {
-            if let modelToFill = segue.source as? ViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let modelToFill = segue.source as? CreatingTimerViewController, let indexPath = tableView.indexPathForSelectedRow {
             if modelToFill.seconds == 0 && modelToFill.minutes == 0 && modelToFill.hours == 0 {
              // if user tries to update the cell with 0h 0m 0s
                 // takes care of all the logic
@@ -763,7 +763,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 
             // if the cell was modified and the tableView.indexPathForSelectedRow is NOT Empty it fetches the currentViewController with all it's values and also fetches the index of a cell that was modified
             } else {
-            if let newData = segue.source as? ViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let newData = segue.source as? CreatingTimerViewController, let indexPath = tableView.indexPathForSelectedRow {
                 
                 
                 // and updates all of the arrays based on the new / modified information
@@ -792,13 +792,13 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
     }
     
     
-    @IBSegueAction func segueFromCell(_ coder: NSCoder) -> ViewController? {
+    @IBSegueAction func segueFromCell(_ coder: NSCoder) -> CreatingTimerViewController? {
         
         print("segue from cell")
         if let cell =  tableView.cellForRow(at: tableView.indexPathForSelectedRow ?? IndexPath(row: 200, section: 0)) as? TableViewCell {
             
             print("workennnng")
-            cell.resetButton.titleLabel?.font = .systemFont(ofSize: ViewController.view2.width / 30)
+            cell.resetButton.titleLabel?.font = .systemFont(ofSize: CreatingTimerViewController.view2.width / 30)
         }
 // creates the placeholder variable fo IndexPath, because you are going to fill this variable with proper indexPath in `if let` statement.
         var indexPath = IndexPath()
@@ -822,14 +822,14 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
         //creating a viewControllerInstance to return and filling it up with data
-        return ViewController(coder: coder, timer: timer)
+        return CreatingTimerViewController(coder: coder, timer: timer)
     }
     
     // adding a new timer:
-    @IBSegueAction func addSegue(_ coder: NSCoder) -> ViewController? {
+    @IBSegueAction func addSegue(_ coder: NSCoder) -> CreatingTimerViewController? {
         print("add segue")
         //creating a viewControllerInstance to return and filling it up with data
-        return ViewController(coder: coder, timer: nil)
+        return CreatingTimerViewController(coder: coder, timer: nil)
     }
     
     //disablig editing mode:
@@ -840,24 +840,4 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
 }
 
 
-extension TimeInterval {
-    var hourMinuteSecondMS: String {
-        String(format:"%d:%02d:%02d.%03d", hour, minute, second, millisecond)
-    }
-    var minuteSecondMS: String {
-        String(format:"%d:%02d.%03d", minute, second, millisecond)
-    }
-    var hour: Int {
-       return  Int((self/3600).truncatingRemainder(dividingBy: 3600))
-    }
-    var minute: Int {
-      return  Int((self/60).truncatingRemainder(dividingBy: 60))
-    }
-    var second: Int {
-       return Int(truncatingRemainder(dividingBy: 60))
-    }
-    var millisecond: Int {
-       return Int((self*1000).truncatingRemainder(dividingBy: 1000))
-    }
-}
 

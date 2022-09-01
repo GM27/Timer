@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class ViewController: UIViewController  {
+class CreatingTimerViewController: UIViewController  {
    
     static var view2 = CGRect() {
         
@@ -31,7 +31,7 @@ class ViewController: UIViewController  {
     
     
     override func viewDidLoad()  {
-        ViewController.view2 = view.frame
+        CreatingTimerViewController.view2 = view.frame
         ViewFrame.frame = view.frame
         
         self.view.backgroundColor = UIColor.bodyColor
@@ -336,7 +336,7 @@ func moveDown(toY: Int) {
 
 
 // MARK: Picker Delegate and DataSource and TextFieldDataSource
-extension ViewController: UIPickerViewDataSource {
+extension CreatingTimerViewController: UIPickerViewDataSource {
     
     // number of components in picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -361,10 +361,10 @@ extension ViewController: UIPickerViewDataSource {
        
     }
 }
-extension ViewController: UIPickerViewDelegate {
+extension CreatingTimerViewController: UIPickerViewDelegate {
    // row height in picker
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return CGFloat(Double(ViewController.view2.height) / 29.8)
+        return CGFloat(Double(CreatingTimerViewController.view2.height) / 29.8)
     }
     
     // configuring the font size and color for a row in picker
@@ -373,7 +373,7 @@ extension ViewController: UIPickerViewDelegate {
                if let v = view {
                    label = v as! UILabel
                }
-        label.font = .systemFont(ofSize: CGFloat(ViewController.view2.height / 35) )
+        label.font = .systemFont(ofSize: CGFloat(CreatingTimerViewController.view2.height / 35) )
      
                label.text =  String(row)
                label.textAlignment = .center
@@ -427,7 +427,7 @@ extension ViewController: UIPickerViewDelegate {
 
 
 // just for hiding the keyboard at appropriate time
-extension ViewController: UITextFieldDelegate {
+extension CreatingTimerViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
        

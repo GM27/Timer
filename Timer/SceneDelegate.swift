@@ -127,9 +127,6 @@ var index = 0
                               elem.start()
                            
                           }
-                        
-                   
-                      
                   } else {
                       print("thats the case")
                       print(TableTableViewController.originalTimers)
@@ -148,24 +145,14 @@ var index = 0
               
               index += 1
           }
-       
         TableTableViewController.indicesToReloadAt = indicesToReloadAt
-      
-        //
         NotificationCenter.default.post(name: NSNotification.Name("ReloadNotification"), object: nil)
-        
-        print("finished did enter foreground")
     
     }
    
-   
-
     func sceneDidEnterBackground(_ scene: UIScene) {
        
       
     }
-
-
-
 
 }
