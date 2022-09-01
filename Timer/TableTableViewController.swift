@@ -763,23 +763,24 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 
             // if the cell was modified and the tableView.indexPathForSelectedRow is NOT Empty it fetches the currentViewController with all it's values and also fetches the index of a cell that was modified
             } else {
-            if let something = segue.source as? ViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let newData = segue.source as? ViewController, let indexPath = tableView.indexPathForSelectedRow {
                 
                 
                 // and updates all of the arrays based on the new / modified information
                 // and reload the updated row:
-                TableTableViewController.timers[indexPath.row].hours = something.hours
-                TableTableViewController.timers[indexPath.row].minutes = something.minutes
-                TableTableViewController.timers[indexPath.row].seconds = something.seconds
-                TableTableViewController.timers[indexPath.row].name = something.name
-                TableTableViewController.timers[indexPath.row].notification.reminder.timeInterval = TimeInterval((something.seconds + ((something.hours * 60 * 60)) + (something.minutes * 60)))
-                TableTableViewController.originalTimers[indexPath.row].hours = something.hours
-                TableTableViewController.originalTimers[indexPath.row].minutes = something.minutes
-                TableTableViewController.originalTimers[indexPath.row].seconds = something.seconds
-                TableTableViewController.cells[indexPath.row].currentHours = something.hours
-                TableTableViewController.cells[indexPath.row].currentMinutes = something.minutes
-                TableTableViewController.cells[indexPath.row].currentSeconds = something.seconds
-                TableTableViewController.cells[indexPath.row].name = something.name
+                TableTableViewController.timers[indexPath.row].hours = newData.hours
+                TableTableViewController.timers[indexPath.row].minutes = newData.minutes
+                TableTableViewController.timers[indexPath.row].seconds = newData.seconds
+                TableTableViewController.timers[indexPath.row].name = newData.name
+                TableTableViewController.timers[indexPath.row].notification.reminder.timeInterval = TimeInterval((newData.seconds + ((newData.hours * 60 * 60)) + (newData.minutes * 60)))
+                TableTableViewController.timers[indexPath.row].notification.name = newData.name
+                TableTableViewController.originalTimers[indexPath.row].hours = newData.hours
+                TableTableViewController.originalTimers[indexPath.row].minutes = newData.minutes
+                TableTableViewController.originalTimers[indexPath.row].seconds = newData.seconds
+                TableTableViewController.cells[indexPath.row].currentHours = newData.hours
+                TableTableViewController.cells[indexPath.row].currentMinutes = newData.minutes
+                TableTableViewController.cells[indexPath.row].currentSeconds = newData.seconds
+                TableTableViewController.cells[indexPath.row].name = newData.name
                 tableView.reloadRows(at: [indexPath], with: .none)
                 
             }
@@ -789,8 +790,6 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         }
     }
     
-    
- //   var savedCell = TableTableViewController.cells[tableView.indexPathForSelectedRow]
     
     @IBSegueAction func segueFromCell(_ coder: NSCoder) -> ViewController? {
         

@@ -128,13 +128,13 @@
 				3F685629282B431C00A1A352 /* Main.storyboard */,
 				3F685653282B437600A1A352 /* TableTableViewController.swift */,
 				3FF30C3728AC9FBA005007E5 /* NotificationManager.swift */,
-				3FC3244F28B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav */,
 				3F5D56DA28A9EF680009AA7B /* Persistance.swift */,
 				3F5C737D28A3540500F3C8EB /* CellModel.swift */,
 				3F685655282B438200A1A352 /* TableViewCell.swift */,
 				3FF11D3028B1D95B003D5FF2 /* ViewFrameStorage.swift */,
 				3F685657282B456800A1A352 /* TimerAndModelData.swift */,
 				3F68562C282B431D00A1A352 /* Assets.xcassets */,
+				3FC3245528C03CBF0036FC18 /* Sounds */,
 				3F68562E282B431D00A1A352 /* LaunchScreen.storyboard */,
 				3F685631282B431D00A1A352 /* Info.plist */,
 			);
@@ -156,6 +156,14 @@
 				3F685646282B431D00A1A352 /* TimerUITestsLaunchTests.swift */,
 			);
 			path = TimerUITests;
+			sourceTree = "<group>";
+		};
+		3FC3245528C03CBF0036FC18 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3FC3244F28B341A70036FC18 /* mixkit-urgent-simple-tone-loop-2976.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		3FF11D2B28B16586003D5FF2 /* extensions */ = {
