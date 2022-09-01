@@ -768,6 +768,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 
                 // and updates all of the arrays based on the new / modified information
                 // and reload the updated row:
+                // reconfiguring a notification
                 TableTableViewController.timers[indexPath.row].hours = newData.hours
                 TableTableViewController.timers[indexPath.row].minutes = newData.minutes
                 TableTableViewController.timers[indexPath.row].seconds = newData.seconds
