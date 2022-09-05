@@ -115,7 +115,7 @@
                         <outlet property="justHoursLabel" destination="jod-J3-ziD" id="544-9d-wzV"/>
                         <outlet property="justMinutesLabel" destination="tv8-VE-XJE" id="Gs5-nP-KtX"/>
                         <outlet property="justSecondsLabel" destination="rxM-l8-DbN" id="IIO-E9-7sS"/>
-                        <segue destination="3LF-MW-dAD" kind="show" identifier="pickASound" id="Qyb-Bk-bgf"/>
+                        <segue destination="3LF-MW-dAD" kind="presentation" identifier="pickASound" id="Qyb-Bk-bgf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -128,7 +128,7 @@
             <objects>
                 <viewController id="3LF-MW-dAD" customClass="SoundsViewController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="owk-4R-ClT">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="CZ3-yn-mgb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MNf-s5-c3i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1681" y="72"/>
+            <point key="canvasLocation" x="1647" y="75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zXN-rI-rvh">

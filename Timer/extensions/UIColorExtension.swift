@@ -24,13 +24,13 @@ extension UIColor {
            blue: rgb & 0xFF
        )
    }
-   //  0x4f7bb3
+   
     static var bodyColor: UIColor {return UIColor(rgb: 0x90b4de)}
-    static var viewColor: UIColor{return UIColor(rgb: 0x5a82b8)}
-    static var bar2ControllerColor : UIColor{return UIColor(rgb: 0x446691)}
+    static var viewColor: UIColor{return UIColor(rgb: 0x4f7bb3)}
+    static var bar2ControllerColor : UIColor{return UIColor(rgb:  0x446691 )}
     static var kindaDarkGray: UIColor{return UIColor(rgb: 0x596169)}
     static var redWeNeed: UIColor{return UIColor(rgb: 0xBD5571)}
-    static var greenWeNeed: UIColor{return UIColor(rgb: 0x6CAF65)}
+    static var greenWeNeed: UIColor{return UIColor(rgb: 0x44A391)}
     static var resetColor: UIColor{return UIColor(rgb: 0x7d93b0)}
     static var timelabelColor: UIColor{return UIColor(rgb: 0x4f7bb3)}
     static var cellColor: UIColor{return UIColor(rgb: 0x90b4de)}

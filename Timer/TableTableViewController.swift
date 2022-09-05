@@ -55,9 +55,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
     
     //this function creates a subscription to the Timer2's publisher (which is subject)
     func createASubscriptionForTimer() {
-      
          Timer2.subject.sink { value in
-           
             print("recivedtheValue")
             //only reloads if table view is currently not editing:
             if TableTableViewController.reloadAllowed == true {
@@ -96,15 +94,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 TableTableViewController.cells[number].currentSeconds = cell2.currentSeconds
                 TableTableViewController.cells[number].currentMinutes = cell2.currentMinutes
                 TableTableViewController.cells[number].currentHours = cell2.currentHours
-             print("updated cell:")
-                //(TableTableViewController.cells[number].currentHours, ":", TableTableViewController.cells[number].currentMinutes, ":", TableTableViewController.cells[number].currentSeconds)
-           // reloading the row that was updated
-              //  if self.aboutToReload == true {
-              //      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-              //  self.tableView.reloadRows(at: [IndexPath(row: number , section: 0)], with: .none)
-              //  }
-              //  } else {
-                    self.tableView.reloadRows(at: [IndexPath(row: number , section: 0)], with: .none)
+                self.tableView.reloadRows(at: [IndexPath(row: number , section: 0)], with: .none)
               //  }
                 print("subscription working 3")
                 // making a number a 0 so the next time the subscription gets utilized, the while loop won't build on the previous value of a number
@@ -134,10 +124,8 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                     UIView.animate(withDuration: 0.1, delay: 0.0, animations: {value.button.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)})
                  // fetching the right cell to edit after the bplay button has been tapped:
                  
-                       // adjusting the button:
-                    
-                  //  value.button.backgroundColor = UIColor.redWeNeed
-                  //  value.button.setTitle("psss", for: UIControl.State.normal)
+                  
+                
                     print("timer started")
                     // changing the values of a cell to indicate that the play  button has been tapped:
                  //   cells[indexPath.row].playTapped = true
@@ -149,6 +137,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                     // starting a timer:
                             TableTableViewController.timers[indexPath.row].start()
                       print("started timer at index path: \(indexPath)")
+                   
                 } else {
                    // if pause was tapped, stopping the timer:
                     var notification =  TableTableViewController.timers[indexPath.row].notification
@@ -517,9 +506,16 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
          }
      }
     
+    
+    @objc func swipeUp() {
+        print("working swipe")
+        TableTableViewController.reloadAllowed = false
+    }
+    
+    
     override func viewDidLoad() {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
-        
+      
         // two gestures for the left and right swipes:
         var tapGesture = UISwipeGestureRecognizer(target: self, action: #selector(tapEdit))
         tapGesture.direction = .left
@@ -530,6 +526,13 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         tapGesture2.direction = .right
          tableView.addGestureRecognizer(tapGesture2)
          tapGesture2.delegate = self
+        
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp))
+        swipeUp.direction = .up
+        tableView.addGestureRecognizer(swipeUp)
+        swipeUp.delegate = self
+        
+        
         
         // listens for the notification from sceneWilEnterForeground to reload properly
     NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name("ReloadNotification"), object: nil)
@@ -640,6 +643,8 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
             cell.playButton.setTitle("Pause", for: .normal)
             cell.playButton.backgroundColor = UIColor.redWeNeed
             cell.playButton.titleLabel?.font = .systemFont(ofSize: ViewFrame.frame.width / 30)
+       
+           
         
      }
         // configuring the buttons:
@@ -698,6 +703,15 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         
     }
     
+ 
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("wahhaa")
+        TableTableViewController.reloadAllowed = false
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        TableTableViewController.reloadAllowed = true 
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // setting the height of the cell:
@@ -717,8 +731,19 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
             // creating a timer to append to array, if timer's minutes, seconds and hours are 0 then the if statement will do nothing and nothing will be added to the arrays:
             if modelToFill.seconds == 0 && modelToFill.minutes == 0 && modelToFill.hours == 0 {
             } else {
+                
                 // creting a new Timer2 instance to add to the array
-                let element = Timer2(seconds: modelToFill.seconds, minutes: modelToFill.minutes, hours: modelToFill.hours, name: modelToFill.name, isEnabled: false, notification: Task( name: modelToFill.name, completed: false, reminderEnabled: true, reminder: Reminder(timeInterval: TimeInterval((modelToFill.seconds + ((modelToFill.hours * 60 * 60)) + (modelToFill.minutes * 60))), date: nil, repeats: false)))
+                var nameToFill = ""
+                for sound in SoundsData.soundFiles {
+                    if sound.name ==  CreatingTimerViewController.soundName {
+                        nameToFill = sound.file + ".wav"
+                    }
+                }
+                if nameToFill == "" {
+                    nameToFill = "COMCell_Message 1 (ID 1111)_BSB.wav"
+                }
+                let element = Timer2(seconds: modelToFill.seconds, minutes: modelToFill.minutes, hours: modelToFill.hours, name: modelToFill.name, isEnabled: false, notification: Task( name: modelToFill.name, completed: false, reminderEnabled: true, reminder: Reminder(timeInterval: TimeInterval((modelToFill.seconds + ((modelToFill.hours * 60 * 60)) + (modelToFill.minutes * 60))), date: nil, repeats: false), sound: nameToFill))
+               
             
                 
                 
@@ -745,6 +770,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
            
         } else {
             if let modelToFill = segue.source as? CreatingTimerViewController, let indexPath = tableView.indexPathForSelectedRow {
+                
             if modelToFill.seconds == 0 && modelToFill.minutes == 0 && modelToFill.hours == 0 {
              // if user tries to update the cell with 0h 0m 0s
                 // takes care of all the logic
@@ -763,16 +789,28 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 
             // if the cell was modified and the tableView.indexPathForSelectedRow is NOT Empty it fetches the currentViewController with all it's values and also fetches the index of a cell that was modified
             } else {
+                
             if let newData = segue.source as? CreatingTimerViewController, let indexPath = tableView.indexPathForSelectedRow {
                 
                 
                 // and updates all of the arrays based on the new / modified information
                 // and reload the updated row:
                 // reconfiguring a notification
+              
                 TableTableViewController.timers[indexPath.row].hours = newData.hours
                 TableTableViewController.timers[indexPath.row].minutes = newData.minutes
                 TableTableViewController.timers[indexPath.row].seconds = newData.seconds
                 TableTableViewController.timers[indexPath.row].name = newData.name
+                var nameToFill = ""
+                for sound in SoundsData.soundFiles {
+                    if sound.name ==  CreatingTimerViewController.soundName {
+                        nameToFill = sound.file + ".wav"
+                    }
+                }
+                if nameToFill == "" {
+                    nameToFill = "COMCell_Message 1 (ID 1111)_BSB.wav"
+                }
+                TableTableViewController.timers[indexPath.row].notification.sound = nameToFill
                 TableTableViewController.timers[indexPath.row].notification.reminder.timeInterval = TimeInterval((newData.seconds + ((newData.hours * 60 * 60)) + (newData.minutes * 60)))
                 TableTableViewController.timers[indexPath.row].notification.name = newData.name
                 TableTableViewController.originalTimers[indexPath.row].hours = newData.hours
@@ -782,6 +820,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
                 TableTableViewController.cells[indexPath.row].currentMinutes = newData.minutes
                 TableTableViewController.cells[indexPath.row].currentSeconds = newData.seconds
                 TableTableViewController.cells[indexPath.row].name = newData.name
+             
                 tableView.reloadRows(at: [indexPath], with: .none)
                 
             }
@@ -815,6 +854,9 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
         //updating the cell's Model after stopping the timer to match the "stopped state" of the timer:
         //NOTE: if the timer was already stopped we don't modify the cells array, because it has already been modified
         // also reloading the table view to update the interface of a cell, bu because we reloaded the cell, it means that it's not selected anymore and we have to select it in order for `unwindSegue` to work properly:
+       
+        
+        let controller = CreatingTimerViewController(coder: coder, timer: timer)
         if TableTableViewController.cells[indexPath.row].playTapped == true && TableTableViewController.cells[indexPath.row].pauseTapped == false {
             TableTableViewController.cells[indexPath.row].pauseTapped = true
             TableTableViewController.cells[indexPath.row].playTapped = false
@@ -822,7 +864,7 @@ class TableTableViewController: UITableViewController, UIGestureRecognizerDelega
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
         //creating a viewControllerInstance to return and filling it up with data
-        return CreatingTimerViewController(coder: coder, timer: timer)
+        return controller
     }
     
     // adding a new timer:

@@ -38,7 +38,7 @@ class TableViewCell: UITableViewCell {
         super.prepareForReuse()
         playButton.titleLabel?.text = nil
         playButton.backgroundColor = nil
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 1.0
         self.layer.borderColor  = UIColor.black.cgColor
         
        // timeLabel.text = nil
@@ -74,20 +74,8 @@ class TableViewCell: UITableViewCell {
  
     
     var playButton = UIButton()
-     
-  
-    
     var resetButton = UIButton()
-       
-       
-      
-        
-    
-    
     var timeLabel = UILabel()
-        
-    
-    
     var name = UILabel()
     
     
@@ -119,8 +107,10 @@ class TableViewCell: UITableViewCell {
             self.toReloadWith = value
         }
         
+        
         self.backgroundColor = UIColor.cellColor
         self.layer.borderWidth = 0.5
+        
     }
     
     
@@ -128,6 +118,12 @@ class TableViewCell: UITableViewCell {
     @objc func playtapped() {
         print("playtapped")
         TableViewCell.playTapped.send(SendCellAndButton.init(cell: self, button: playButton))
+      
+        TableTableViewController.reloadAllowed = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            TableTableViewController.reloadAllowed = true
+           
+        }
     }
 
     @objc func resetButtontapped() {
