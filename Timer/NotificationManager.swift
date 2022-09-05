@@ -14,7 +14,7 @@ class NotificationManager {
 func requestAuthorization(completion: @escaping  (Bool) -> Void) {
   UNUserNotificationCenter.current()
     .requestAuthorization(options: [.alert, .sound, .badge]) { granted, _  in
-      // TODO: Fetch notification settings
+     
       completion(granted)
     }
 }
@@ -24,7 +24,8 @@ func scheduleNotification(task: Task) {
       let content = UNMutableNotificationContent()
       content.title = task.name
       content.body = "Timer has expired!"
-     content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "mixkit-urgent-simple-tone-loop-2976.wav"))
+   // content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "THE-KILLER-IS-ESCAPING.wav"))
+    content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: task.sound))
       var trigger: UNNotificationTrigger?
 
         if let timeInterval = task.reminder.timeInterval {
@@ -57,7 +58,7 @@ struct Task: Identifiable, Codable {
   var completed = false
   var reminderEnabled = false
   var reminder: Reminder
-    
+  var sound: String
     
     
 }

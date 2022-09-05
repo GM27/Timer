@@ -76,7 +76,7 @@ struct Encode {
          let propertyListEncoder = PropertyListEncoder()
          if let encodedNote = try? propertyListEncoder.encode(encodingItems) {
              try? encodedNote.write(to: archieveURL, options: .noFileProtection)
-             PrintingModel.nowDate = Date()
+          
          }
      }
     
@@ -87,7 +87,7 @@ struct Encode {
         let propertyListDecoder = PropertyListDecoder()
         if let retreivedData = try? Data(contentsOf: archieveURL), let decodedData = try? propertyListDecoder.decode(EncodingItems.self, from: retreivedData) {
            decodedData1 = decodedData
-            PrintingModel.pastDate =   decodedData1.exitDate
+        
         }
         
         return decodedData1

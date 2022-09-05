@@ -6,17 +6,42 @@
 //
 
 import UIKit
+import Combine
 
 
-
-class ViewController: UIViewController  {
+class CreatingTimerViewController: UIViewController  {
    
+    
+    var subscriptions = Set<AnyCancellable>()
+    
     static var view2 = CGRect() {
         
         didSet {
             print(view2)
         }
     }
+
+    static var soundName = ""
+    var count = 0
+      
+    func appeared() {
+        SoundsViewController.willDisappear.sink { value in
+            self.selectSoundLabel.text = "Selected: \(CreatingTimerViewController.soundName)"
+            
+
+            
+            print("Hello")
+            if self.picker.isHidden == true {
+                self.selectSoundLabel.frame = CGRect(x: self.view.frame.maxX / 30  , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 50, width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
+            } else {
+                self.selectSoundLabel.frame = CGRect(x: self.view.frame.maxX / 30  , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 3.7 , width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
+            }
+        }.store(in: &subscriptions)
+    }
+    
+    
+    
+    
     required init? (coder: NSCoder, timer: Timer2?) {
         self.timer = timer
         super.init(coder: coder)
@@ -28,10 +53,19 @@ class ViewController: UIViewController  {
    
     }
   
-    
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("hu")
+    }
+ 
     override func viewDidLoad()  {
-        ViewController.view2 = view.frame
+    
+        if count == 0 {
+            appeared()
+            count += 1
+        }
+    
+        CreatingTimerViewController.view2 = view.frame
         ViewFrame.frame = view.frame
         
         self.view.backgroundColor = UIColor.bodyColor
@@ -71,7 +105,13 @@ class ViewController: UIViewController  {
     navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     self.navigationController?.navigationBar.tintColor = UIColor.black
     navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-    
+        
+        var nameToFill = ""
+        for sound in SoundsData.soundFiles {
+            if sound.file + ".wav" == timer.notification.sound {
+                selectSoundLabel.text = "Selected: \(sound.name)"
+            }
+        }
 } else {
     UI()
     navigationItem.title = "Create New Timer"
@@ -106,6 +146,9 @@ class ViewController: UIViewController  {
     var semicolon1 = UILabel()
     var semicolon2 = UILabel()
     var timelabelsView = UIView()
+    var pickSoundsView = UIView()
+  var selectSoundLabel = UILabel()
+    var imageView = UIImageView()
     @IBOutlet weak var justHoursLabel: UILabel!
     @IBOutlet weak var justMinutesLabel: UILabel!
     @IBOutlet weak var justSecondsLabel: UILabel!
@@ -120,12 +163,9 @@ class ViewController: UIViewController  {
             justHoursLabel.isHidden = false
             justMinutesLabel.isHidden = false
             justSecondsLabel.isHidden = false
-          
-            print(Int(self.timeLabelHours.text!) ?? 99999)
-            print(Int(self.timeLabelMinutes.text!) ?? 66666)
-            print(Int(self.timeLabelSeconds.text!) ?? 66666)
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.1, animations:  {
                 sender.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+                self.imageView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
                 self.moveDown(toY: 20)
             },completion: { _ in
                 self.picker.selectRow(self.hours, inComponent: 0, animated: true)
@@ -136,7 +176,11 @@ class ViewController: UIViewController  {
         } else {
             UIView.animate(withDuration: 0.1, animations:  {
                 self.moveUp(toY: 810)
+                self.pickSoundsView.frame = CGRect(x: self.view.frame.maxX / 100 , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 47 , width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
+                
+                self.selectSoundLabel.frame = CGRect(x: self.view.frame.maxX / 30  , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 47 , width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
                 sender.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.picker.selectRow(0 ,inComponent: 0, animated: true)
                 self.picker.selectRow(0, inComponent: 1, animated: true)
                 self.picker.selectRow(0, inComponent: 2, animated: true)
@@ -164,7 +208,22 @@ class ViewController: UIViewController  {
     }
     
     
- 
+    @objc func selectSoundTapped() {
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            
+            if self.picker.isHidden == true {
+            self.selectSoundLabel.frame = CGRect(x: self.view.frame.maxX  , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 45 , width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
+            } else {
+                self.selectSoundLabel.frame = CGRect(x: self.view.frame.maxX  , y: self.viewAfterButton.frame.maxY + self.view.frame.maxY / 3.7 , width: self.view.frame.width - (self.view.frame.width / 55) , height: self.view.frame.height / 20 )
+            }
+        
+        }
+                       , completion:  {_ in   self.performSegue(withIdentifier: "pickASound", sender: self)})
+            
+       
+        
+    }
 
     func UI() {
         // assigning data source and hiding everything that is supposed to be hidden
@@ -176,14 +235,36 @@ class ViewController: UIViewController  {
         justSecondsLabel.isHidden = true
       
        
+        selectSoundLabel.frame = CGRect(x: view.frame.maxX / 30  , y: viewAfterButton.frame.maxY + view.frame.maxY / 3.5 , width: view.frame.width - (view.frame.width / 55) , height: view.frame.height / 20 )
+        selectSoundLabel.font =  .systemFont(ofSize: view.frame.height / 50)
+          
+        selectSoundLabel.text = "Select the sound >"
+        selectSoundLabel.textColor = .black
+        //selectSoundLabel.layer.borderWidth = 1.0
+        //selectSoundLabel.layer.borderColor = UIColor.black.cgColor
+        view.addSubview(selectSoundLabel)
+       
+        
+            pickSoundsView.frame = CGRect(x: view.frame.maxX / 100 , y: viewAfterButton.frame.maxY + view.frame.maxY / 3.5 , width: view.frame.width - (view.frame.width / 55) , height: view.frame.height / 20 )
+            pickSoundsView.backgroundColor = .timelabelColor
+        pickSoundsView.layer.cornerRadius = 5
+     //   pickSoundsView.layer.borderColor = UIColor.black.cgColor
+      //  pickSoundsView.layer.borderWidth = 2.0
+        var gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectSoundTapped))
+        pickSoundsView.addGestureRecognizer(gestureRecognizer)
+        view.addSubview(pickSoundsView)
+        view.bringSubviewToFront(selectSoundLabel)
+        
         
         
         // name label configuration:
-        nameLabel.frame = CGRect(x: view.frame.width / 32, y:  (navigationController?.navigationBar.frame.maxY ?? 99999) + view.frame.maxY / 89.6, width: view.frame.width - ((view.frame.width / 41.4) * 2), height: view.frame.height / 20)
+        nameLabel.frame = CGRect(x: view.frame.width / 36, y:  (navigationController?.navigationBar.frame.maxY ?? 99999) + view.frame.maxY / 89.6, width: view.frame.width - ((view.frame.width / 41.4) * 2), height: view.frame.height / 20)
         nameLabel.tintColor = .black
         nameLabel.delegate = self
         nameLabel.textColor = .black
-        nameLabel.layer.cornerRadius = 10
+        nameLabel.layer.cornerRadius = 5
+        nameLabel.layer.borderColor = UIColor.black.cgColor
+      //  nameLabel.layer.borderWidth = 1.0
         nameLabel.backgroundColor = UIColor.timelabelColor
         nameLabel.font = .systemFont(ofSize: view.frame.height / 59.7)
         nameLabel.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
@@ -198,8 +279,11 @@ class ViewController: UIViewController  {
         timeSetButton.titleLabel?.font = .systemFont(ofSize: view.frame.height / 56, weight: .regular)
         timeSetButton.setTitleColor(.black, for: .normal)
         timeSetButton.setTitle("Set The Time", for: .normal)
-        timeSetButton.layer.cornerRadius = 10
+        timeSetButton.layer.cornerRadius = 5
         timeSetButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
+      
+      //  timeSetButton.layer.borderColor = UIColor.black.cgColor
+       // timeSetButton.layer.borderWidth = 1.0
         view.addSubview(timeSetButton)
         // ////////////////////////////
         
@@ -214,9 +298,9 @@ class ViewController: UIViewController  {
         // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         
-      
-        
-        
+        imageView.frame = CGRect(x: view.frame.width / 90 , y: nameLabel.frame.maxY +  view.frame.maxY / 65 , width: view.frame.width / 2.35, height: view.frame.height / 16)
+        imageView.image = UIImage(named: "buttonFrame")
+        view.addSubview(imageView)
         
         
 
@@ -267,16 +351,11 @@ class ViewController: UIViewController  {
         view.bringSubviewToFront(semicolon1)
         view.bringSubviewToFront(semicolon2)
         
-        
-        
         // viewAfterButton
         viewAfterButton.frame = CGRect(x: 0, y: timeSetButton.frame.maxY + (view.frame.maxY / 40) , width: view.frame.width,  height: view.frame.height / 280)
         viewAfterButton.backgroundColor = .black
         view.addSubview(viewAfterButton)
         // /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-
-        
         
         // picker configuration:
         picker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height:  view.frame.height / 4.14)
@@ -298,7 +377,6 @@ class ViewController: UIViewController  {
       
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        
        // overlayOnPicker  configuration
         overlayOnPicker.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.6, alpha: 0.7)
         overlayOnPicker.alpha = 0.7
@@ -309,7 +387,6 @@ class ViewController: UIViewController  {
       // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
     }
-    
 
 
 // moving the pickers frame down
@@ -319,7 +396,9 @@ func moveDown(toY: Int) {
     justMinutesLabel.frame = CGRect(x: view.frame.maxX / 1.84, y: view.frame.maxY / 2.7, width: view.frame.width / 9.40, height: view.frame.height / 33.18)
     justSecondsLabel.frame = CGRect(x: view.frame.maxX / 1.16, y: view.frame.maxY / 2.7, width: view.frame.width / 9.40, height:  view.frame.height / 33.18)
     overlayOnPicker.frame  = CGRect(x: view.frame.maxX / 179.2 , y: view.frame.maxY / 10, width: view.frame.width / 1.02  , height: view.frame.height / 25.6)
-   
+    pickSoundsView.frame = CGRect(x:  view.frame.maxX / 100  , y: viewAfterButton.frame.maxY + view.frame.maxY / 3.7 , width: view.frame.width - (view.frame.width / 55) , height: view.frame.height / 20 )
+
+    selectSoundLabel.frame = CGRect(x: view.frame.maxX / 30  , y: viewAfterButton.frame.maxY + view.frame.maxY / 3.7 , width: view.frame.width - (view.frame.width / 55) , height: view.frame.height / 20 )
 }
     // moving the picker's frame up at the time of an animation after Set The Time
     func moveUp(toY: Int) {
@@ -328,15 +407,13 @@ func moveDown(toY: Int) {
         justMinutesLabel.frame = CGRect(x: 225, y: toY + 96, width: 44, height: 27)
         justSecondsLabel.frame = CGRect(x: 356, y: toY + 96, width: 44, height: 27)
         overlayOnPicker.frame = CGRect(x: 5, y: toY - 720, width: 409, height: 35)
+     
     }
     
 }
 
-
-
-
 // MARK: Picker Delegate and DataSource and TextFieldDataSource
-extension ViewController: UIPickerViewDataSource {
+extension CreatingTimerViewController: UIPickerViewDataSource {
     
     // number of components in picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -361,10 +438,10 @@ extension ViewController: UIPickerViewDataSource {
        
     }
 }
-extension ViewController: UIPickerViewDelegate {
+extension CreatingTimerViewController: UIPickerViewDelegate {
    // row height in picker
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return CGFloat(Double(ViewController.view2.height) / 29.8)
+        return CGFloat(Double(CreatingTimerViewController.view2.height) / 29.8)
     }
     
     // configuring the font size and color for a row in picker
@@ -373,21 +450,13 @@ extension ViewController: UIPickerViewDelegate {
                if let v = view {
                    label = v as! UILabel
                }
-        label.font = .systemFont(ofSize: CGFloat(ViewController.view2.height / 35) )
+        label.font = .systemFont(ofSize: CGFloat(CreatingTimerViewController.view2.height / 35) )
      
                label.text =  String(row)
                label.textAlignment = .center
                return label
     }
   
-    
- //  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent //component: Int) -> String? {
-        // updating names for picker
-       
-   // }
-    
-    
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
       // updatitng a bunch of labels with time selected  and saving it to variables
         switch component {
@@ -425,9 +494,8 @@ extension ViewController: UIPickerViewDelegate {
     
 }
 
-
 // just for hiding the keyboard at appropriate time
-extension ViewController: UITextFieldDelegate {
+extension CreatingTimerViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
        
